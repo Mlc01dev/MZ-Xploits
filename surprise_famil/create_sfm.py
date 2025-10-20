@@ -6,7 +6,7 @@ import sys
 from lzstring import LZString
 from pyqrcode import QRCode
 from time import time
-from typing import Dict
+from typing import cast, Dict
 
 KNOWN_CARDS = [
   "Famil",          "Incognita",            "ElvisTeck",
@@ -35,7 +35,7 @@ def decode_lz(input: str) -> Dict:
     return json.loads(decoded)
 
 def encode_lz(input: Dict) -> str:
-    payload = json.dumps(input).strip(" ")
+    payload = json.dumps(input).strip()
     encoded = LZString.compressToBase64(payload)
 
     return "LZ1:" + encoded
@@ -61,30 +61,33 @@ def create_outer(
     return outer
 
 def create_inner(
-    input: Dict = None,
+    source: Dict = None,
     coins: int = None,
     boxes: int = None,
     last_check: int = None,
     inventory: str = None
 ) -> Dict:
-    if input is None:
-        input = {}
+    if source is not None:
+        if source.get("t"):
+            source_bytes = base64.b64decode(source.get("t"))
+            source_string = source_bytes.decode("utf-8")
+            source = json.loads(source_string)
 
     if coins is None:
-        if input.get("familcoins"):
-            coins = input.get("familcoins")
+        if source.get("familcoins"):
+            coins = source.get("familcoins")
         else:
             coins = 0
 
     if boxes is None:
-        if input.get("cajasAcumuladas"):
-            boxes = input.get("cajasAcumuladas")
+        if source.get("cajasAcumuladas"):
+            boxes = source.get("cajasAcumuladas")
         else:
             boxes = 0
 
     if last_check is None:
-        if input.get("ultimaCajaCheck"):
-            last_check = input.get("ultimaCajaCheck")
+        if source.get("ultimaCajaCheck"):
+            last_check = source.get("ultimaCajaCheck")
         else:
             last_check = 0
 
@@ -98,15 +101,19 @@ def create_inner(
                 inv = json.loads(inventory)
             except ValueError:
                 # fallback to empty inventory
-                inv = {}
+                inv = dict()
     else:
-        inv = {}
+        if source.get("inventario") is not None:
+            inv = source.get("inventario")
+        else:
+            inv = dict()
 
-    input["familcoins"] = coins
-    input["cajasAcumuladas"] = boxes
-    input["ultimaCajaCheck"] = last_check
-    input["inventario"] = inv
-    return input
+    inner = dict()
+    inner["familcoins"] = coins
+    inner["cajasAcumuladas"] = boxes
+    inner["ultimaCajaCheck"] = last_check
+    inner["inventario"] = inv
+    return inner
     
 def main():
     parser = argparse.ArgumentParser(
@@ -147,6 +154,7 @@ def main():
 
     print("Creating inner payload...")
     inner = create_inner(source, args.coins, args.boxes, args.last_check, args.inventory)
+
     print("Creating outer payload...")
     outer = create_outer(inner, 1, args.timestamp)
  
@@ -159,9 +167,7 @@ def main():
                 file.close()
                 print(f"LZ1 string written to {args.output}")
         else:
-            print(
-                "\n\nSFM payload:\n" + lz + "\n\n"
-            )
+            print("\n\nSFM payload:\n" + lz + "\n\n")
     elif args.mode == "json" or args.mode == "sfm":
         # treat sfm as json alias
         data = json.dumps(outer)
