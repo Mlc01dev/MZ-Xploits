@@ -18,18 +18,18 @@ Further info about the gameplay mechanics can be found in this [MadzalMedia arti
 
 In **Surprise Famil**, there is a built-in feature for security backups, it generates a QR code with encoded LZ1 payload for your progress, alternatively, it can be saved as a **.sfm** file.
 
-It is known that apps from MadzalMedia lack of a proper backend server, using [Catbox](https://catbox.moe) as a CDN and fully relying on the `localStorage` API for local progress saving.
+It is known that apps from MadzalMedia lack of a proper backend server, uses [Catbox](https://catbox.moe) as a CDN and fully relies on the `localStorage` API for progress saving.
 
-Since there is no server or client side check for improper or impossible saves, it allows players to create modified savefiles without any restrictions (besides the risk of [getting banned](https://github.com/Mlc01dev/MZ-Xploits/tree/main?tab=readme-ov-file#disclaimer) if promoted the practice).
+Since there is no server or client side check for loading improper or impossible saves, it allows players to create modified savefiles and load them without any restrictions (besides the risk of [getting banned](https://github.com/Mlc01dev/MZ-Xploits/tree/main?tab=readme-ov-file#disclaimer) if the practice is promoted).
 
 > _Yes, I got banned after open sourcing this._ ~ PwLDev
 
 ## Container
 
-The **.sfm** container, similar to other MadZalMedia apps is essentially just a JSON container file which contains minimized save data.
-The data itself is composed by two fundamental parts, the **outer payload** and **inner payload**, both JSON and one contains each other.
+The **.sfm** container, similar to other MadZalMedia apps is essentially a JSON container file which contains minimized save data.
+It is composed by two fundamental parts, the **outer payload** and **inner payload**, both JSON and one contains each other.
 
-The key, type and reverse engineered descriptions are shown for each part in the following tables.
+Key, type and reverse engineered descriptions are shown for each component in the following tables.
 
 ### Outer Payload
 
@@ -67,7 +67,7 @@ Famil, Incognita, ElvisTeck, CBJ, West Macedonia, Cryselyn, Mm manda, U. Lat, Ch
 
 ## Tool
 
-The `create_sfm.py` Python 3 CLI tool allows to create and modify **.sfm** savefiles and then output them as JSON (in .sfm container), LZ1 strings or QR Code.
+The `create_sfm.py` Python 3 CLI tool allows to create and modify **.sfm** files and then output them as JSON (in .sfm container), LZ1 strings or a QR Code png image.
 
 First make sure you are inside the `surprise_famil` directory.
 
@@ -81,7 +81,7 @@ This tool requires Python 3 along with some required dependencies, you can insta
 pip3 install -r requirements.txt
 ```
 
-After installing the dependencies, run this command to get help onto how to use the tool.
+After installing the dependencies, you can run this command to get help onto how to use the tool.
 
 ```sh
 python3 create_sfm.py -h
