@@ -35,10 +35,12 @@ You click on the Google icon and that's it, you're in the browser!!!!
 
 ## clarifications
 
-This only allows you to browse the web; the one that lets you run arbitrary code is MGH 2.0, which doesn't have an exact release date, and by the way, we don't know when it will be made public.
+This only allows you to browse the web the one that lets you run arbitrary code is MGH 2.0, which doesn't have an exact release date, and by the way, we don't know when it will be made public.
 
 and that's all
+
 creator and writer: Mlcdev01
+
 porting help: PwLDev
 
 bye bye
