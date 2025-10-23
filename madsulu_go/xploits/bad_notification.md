@@ -6,12 +6,12 @@ Xploit for Madsulu Go based on YouTube.
 
 The July 22nd, 2025 a notification was sent to the app users about the MadSulu Go Cup, an event that was happening on the MadSulu Go YouTube channel.
 
-However, this introduced a vulnerability as tapping the notification opens the YouTube post in the app WebView, meaning that if you find a `google.com` hyperlink, you'll be able to browse the web.
+However, this introduced a vulnerability as tapping the notification opens the YouTube post in the app WebView, meaning that if you find a `google.com` (or any) hyperlink, you'll be able to browse the web.
 
 ## Requirements
 
 - Have installed the app before the July 22nd, 2025.
-- Haven't deleted the app data or in-app notifications.
+- Not have deleted the in-app notifications.
 
 ## Xploit
 
@@ -39,9 +39,12 @@ However, this introduced a vulnerability as tapping the notification opens the Y
    <br>
    <img src="../../.github/screenshots/badnotification_6.jpeg" width="150">
 
-TADA! You're reached Google 🎉
+TADA! Now you're on Google 🎉
+<br>
 <img src="../../.github/screenshots/badnotification_7.jpeg" width="150">
 
 ## Notes
 
 This Xploit only allows to escape the app content and browse the web, not to run arbitrary code in the app.
+MGH 2.0 allows for arbitrary code execution for there is no ETA for its release.
+
