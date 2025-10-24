@@ -22,8 +22,8 @@ As of now, there are several known Xploits, most of them are still active.
 **Known Xploits:**
 
 - [Web24](https://youtube.com/shorts/sW432kAt7dk) [PATCHED]
-- [Bad notification](xploits/bad_notification.md)
-- MGH 1.0
+- [Bad Notification](xploits/bad_notification.md)
+- [MGH 1.0](xploits/MGH_1.0.md)
 - MGH 2.0
 
 Further information about each Xploit can be found in their respective documentation.

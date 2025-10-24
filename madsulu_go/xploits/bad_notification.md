@@ -8,6 +8,8 @@ The July 22nd, 2025 a notification was sent to the app users about the MadSulu G
 
 However, this introduced a vulnerability as tapping the notification opens the YouTube post in the app WebView, meaning that if you find a `google.com` (or any) hyperlink, you'll be able to browse the web.
 
+This Xploit was discovered by [PwLDev](https://github.com/PwLDev).
+
 ## Requirements
 
 - Have installed the app before the July 22nd, 2025.
@@ -47,4 +49,3 @@ TADA! Now you're on Google 🎉
 
 This Xploit only allows to escape the app content and browse the web, not to run arbitrary code in the app.
 MGH 2.0 allows for arbitrary code execution for there is no ETA for its release.
-
